@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+BACKEND_DIR="./backend"
+if [ -d "$BACKEND_DIR" ] && [ "$(ls -A $BACKEND_DIR)" ]; then
+  echo "Backend folder not empty."
+else
+  mkdir -p $BACKEND_DIR
+fi
+mkdir -p $BACKEND_DIR
+echo "Install laravel..."
+bin/composer create-project --prefer-dist laravel/laravel .
+echo "Install Jetstream..."
+bin/composer require laravel/jetstream
+echo "Install Jetstream Livewire stack..."
+bin/up
+bin/backend php artisan \
+           jetstream:install \
+               --no-interaction \
+               --dark \
+               --teams \
+               --api \
+               --verification \
+               livewire

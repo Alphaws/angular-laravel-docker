@@ -1,0 +1,9 @@
+#!/bin/bash
+docker run \
+         --rm \
+         --interactive \
+         --tty \
+         --volume $(pwd)/backend:/app \
+         --user $(id -u):$(id -g) \
+         --workdir /app \
+         node "$@"

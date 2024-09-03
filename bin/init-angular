@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+FRONTEND_DIR="./frontend"
+
+if [ -d "$FRONTEND_DIR" ] && [ "$(ls -A $FRONTEND_DIR)" ]; then
+  echo "Frontend folder not empty."
+else
+  mkdir -p $FRONTEND_DIR
+fi
+
+echo "Angular telepítése..."
+
+docker run -it --rm \
+  --network host \
+  --hostname node \
+  --expose 8000 \
+  --volume ./frontend:/app \
+  --volume ./docker/frontend.sh:/tmp/frontend.sh \
+  --workdir /app \
+  node:20 \
+  /bin/bash /tmp/frontend.sh
