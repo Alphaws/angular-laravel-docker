@@ -1,0 +1,10 @@
+#!/bin/bash
+docker run -it --rm \
+  --network host \
+  --hostname node \
+  --expose 8000 \
+  --volume ./frontend:/app \
+  --volume ./docker/frontend.sh:/tmp/frontend.sh \
+  --workdir /app \
+  node:20 \
+  npm "$@"
