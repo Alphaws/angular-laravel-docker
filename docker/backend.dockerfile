@@ -7,14 +7,20 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libfreetype6-dev \
     zip unzip \
+    openssh-server \
     curl \
     git \
     supervisor \
     sudo \
+    nano \
     cron \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install pdo pdo_mysql
+    && docker-php-ext-install -j$(nproc) gd
+
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions
+
+RUN install-php-extensions bcmath exif mbstring pcntl oauth zip pdo pdo_mysql intl opcache
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
