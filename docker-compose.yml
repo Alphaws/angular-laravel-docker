@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
-      - ./backend:/var/www/html
+      - ./${BACKEND_DIR}:/var/www/html
     networks:
       - app-network
 
@@ -54,7 +54,7 @@ services:
       - traefik.log.level=${LOG_LEVEL}
       - traefik.http.services.ald-backend.loadbalancer.server.port=80
     volumes:
-      - ./backend:/var/www/html
+      - ./${BACKEND_DIR}:/var/www/html
       - ./docker/backend.conf:/etc/nginx/conf.d/default.conf
     networks:
       - app-network
@@ -75,7 +75,7 @@ services:
       - traefik.log.level=${LOG_LEVEL}
       - traefik.http.services.ald-frontend.loadbalancer.server.port=80
     volumes:
-      - ./frontend/dist/html:/var/www/html
+      - ./${FRONTEND_DIR}/dist/html:/var/www/html
       - ./docker/frontend.conf:/etc/nginx/conf.d/default.conf
     networks:
       - app-network

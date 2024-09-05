@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
-
-FRONTEND_DIR="./frontend"
+source ./.env
 
 if [ -d "$FRONTEND_DIR" ] && [ "$(ls -A $FRONTEND_DIR)" ]; then
-  echo "Frontend folder not empty."
+  echo "$FRONTEND_DIR folder not empty."
 else
   mkdir -p $FRONTEND_DIR
 fi
@@ -15,7 +14,7 @@ docker run -it --rm \
   --network host \
   --hostname node \
   --expose 8000 \
-  --volume ./frontend:/app \
+  --volume ./$FRONTEND_DIR:/app \
   --volume ./docker/frontend.sh:/tmp/frontend.sh \
   --workdir /app \
   node:20 \
