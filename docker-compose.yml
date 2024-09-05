@@ -48,7 +48,7 @@ services:
       - traefik.enable=true
       - traefik.docker.network=traefik
       - traefik.http.routers.ald-backend.rule=${BACKEND_HOST}
-      - traefik.http.routers.ald-backend.entrypoints=https
+      - traefik.http.routers.ald-backend.entrypoints=websecure
       - traefik.http.routers.ald-backend.tls=true
       - traefik.http.routers.ald-backend.service=ald-backend@docker
       - traefik.log.level=${LOG_LEVEL}
@@ -70,7 +70,7 @@ services:
       - traefik.enable=true
       - traefik.docker.network=traefik
       - traefik.http.routers.ald-frontend.rule=${FRONTEND_HOST}
-      - traefik.http.routers.ald-frontend.entrypoints=https
+      - traefik.http.routers.ald-frontend.entrypoints=websecure
       - traefik.http.routers.ald-frontend.tls=true
       - traefik.log.level=${LOG_LEVEL}
       - traefik.http.services.ald-frontend.loadbalancer.server.port=80
