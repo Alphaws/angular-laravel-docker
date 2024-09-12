@@ -1,5 +1,6 @@
 .idea/
 docker/database
+docker/redis
 backend/
 frontend/
 .env

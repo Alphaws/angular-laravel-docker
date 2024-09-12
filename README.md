@@ -11,12 +11,12 @@ Launch [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/) Wi
 Use [Alphaws/traefik](https://github.com/Alphaws/traeefik)
 
 ```shell
-git pull git@github.com:Alphaws/angular-laravel-docker.git
-cd angular-laravel-docker
+cd {project_dir}
+git pull git@github.com:Alphaws/angular-laravel-docker.git .
 bin/init
 ```
 
-Edit ./.env FRONTEND_HOST and BACKEND_HOST if you want.
+Edit ./.env FRONTEND_HOST and BACKEND_HOST
 Edit ./backend/.env and update APP_URL to https://ald-backend.localhost
 
 Open [Backend](https://ald-backend.localhost) and [Frontend](https://ald.localhost/) 

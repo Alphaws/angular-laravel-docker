@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    zip unzip \
+    zip \
+    unzip \
     openssh-server \
     curl \
     git \
@@ -20,7 +21,24 @@ RUN apt-get update && apt-get install -y \
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
 
-RUN install-php-extensions bcmath exif mbstring pcntl oauth zip pdo pdo_mysql intl opcache
+RUN install-php-extensions \
+    bcmath \
+    exif \
+    intl \
+    mbstring \
+    mcrypt \
+    memcached \
+    oauth \
+    opcache \
+    pcntl \
+    pdo \
+    pdo_mysql \
+    redis \
+    soap \
+    sockets \
+    xml \
+    xsl \
+    zip
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

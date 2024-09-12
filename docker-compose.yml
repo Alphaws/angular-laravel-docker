@@ -19,7 +19,7 @@ services:
     volumes:
       - ./docker/database:/var/lib/mysql
     ports:
-      - "45987:3306"
+      - ${DBS_PORT}:3306
     networks:
       - app-network
 
@@ -34,8 +34,11 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./${BACKEND_DIR}:/var/www/html
+    ports:
+      - ${SSH_PORT}:22
     networks:
       - app-network
+      - traefik
 
   backend-web:
     image: nginx:latest
@@ -62,7 +65,13 @@ services:
       - traefik
 
   frontend:
-    image: nginx:latest
+#    image: nginx:latest
+    build:
+      args:
+        HOST_USER: user
+        HOST_UID: 1000
+      context: ./docker
+      dockerfile: frontend.dockerfile
     depends_on:
       - backend-web
     restart: unless-stopped
@@ -82,3 +91,12 @@ services:
     networks:
       - app-network
       - traefik
+
+  redis-cache:
+    image: redis
+    restart: unless-stopped
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - ./docker/redis:/data
+    networks:
+      - app-network

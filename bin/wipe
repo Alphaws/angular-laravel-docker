@@ -1,0 +1,3 @@
+#!/bin/bash
+bin/artisan migrate:fresh --seed --path=database/migrations/sephir
+bin/artisan migrate:fresh --seed --seeder=TenantSeeder --database=tenant --path=database/migrations/tenant

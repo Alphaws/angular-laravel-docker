@@ -1,0 +1,3 @@
+#!/bin/bash
+bin/update-angular
+bin/update-laravel

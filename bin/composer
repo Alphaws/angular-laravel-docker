@@ -1,10 +1,3 @@
 #!/bin/bash
-docker run \
-         --rm \
-         --interactive \
-         --tty \
-         --network host \
-         --volume ./backend:/app \
-         --user $(id -u):$(id -g) \
-         --workdir /app \
-         composer "$@"
+
+bin/backend composer "$@"
