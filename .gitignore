@@ -4,3 +4,4 @@ docker/redis
 backend/
 frontend/
 .env
+.env.prod

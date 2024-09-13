@@ -1,0 +1,7 @@
+#!/bin/bash
+cd backend && git pull && cd ..
+bin/backend composer install
+bin/backend npm install
+bin/backend npm run build
+bin/artisan migrate --seed --path=database/migrations/sephir
+bin/artisan migrate --seed --seeder=TenantSeeder --database=tenant --path=database/migrations/tenant

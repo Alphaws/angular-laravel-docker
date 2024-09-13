@@ -20,10 +20,17 @@ git clone {frontend-repo-url} frontend
 
 Edit .env
 
-
+### Start backend
+```shell
 docker compose exec backend composer install
 docker compose exec backend npm install
 docker compose exec backend npm run build
+
+docker compose exec backend cp .env.example .env
+docker compose exec backend php artisan key:generate
+```
+edit backend/.env
+
 
 
 Edit ./.env FRONTEND_HOST and BACKEND_HOST
